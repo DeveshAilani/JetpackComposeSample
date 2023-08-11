@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Jetpack Compose Sample"
 include(":app")
- 
+include(":app:lib")
