@@ -33,8 +33,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,7 +52,7 @@ import com.example.androidjetpackcompose.ui.theme.AndroidJetpackComposeTheme
 
 // I'm new to Jetpack Compose and want to learn it properly. Please add detailed and beginner-friendly comments to my code, explaining what each part does in simple language. Also, feel free to improve the code if there are better practices I should follow.
 /**
- * Main activity class for our app.
+ * Main activity class for our app. 321
  * In Android, an Activity is like a single screen in your app.
  *
  * ComponentActivity is the base class for activities using Jetpack Compose.
@@ -103,6 +105,7 @@ class MainActivity : ComponentActivity() {
 /**
  * A Composable function that creates a business card UI component.
  *
+ * @param context The Android Context, used here for showing Toast messages
  * @param name Text to display inside the card
  * @param modifier Optional modifier that will be applied to the outermost element
  */
@@ -113,7 +116,7 @@ fun CreateBizCard(
     modifier: Modifier = Modifier
 ) {
 
-    val buttonClickedState = remember {
+    var buttonClickedState by remember {
         mutableStateOf(false)
     }
 
@@ -175,7 +178,7 @@ fun CreateBizCard(
                         // Toggle the state variable between true and false
                         // This is how we manage UI states in Compose - when this value changes,
                         // Compose will automatically recompose (redraw) the affected UI parts
-                        buttonClickedState.value = !buttonClickedState.value
+                        buttonClickedState = !buttonClickedState
                     }
                 ) {
                     // The button's label/content - in this case just text
@@ -188,7 +191,7 @@ fun CreateBizCard(
                 
                 // Conditional UI based on the button state
                 // This is a key concept in Compose: declarative UI that responds to state changes
-                if (buttonClickedState.value) {
+                if (buttonClickedState) {
                     // When buttonClickedState is true, show the portfolio content
                     Content()
                 } else {
